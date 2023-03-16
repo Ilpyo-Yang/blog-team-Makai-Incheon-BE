@@ -29,9 +29,4 @@ public class TagController {
     public void setTag(@RequestParam("tag") String tag){
         tagService.setTag(tag);
     }
-
-    @DeleteMapping("/delete")
-    public void deleteTag(@RequestParam(value = "uuid") Long uuid){
-        tagService.deleteTag(uuid);
-    }
 }
