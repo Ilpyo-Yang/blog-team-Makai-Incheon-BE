@@ -5,18 +5,27 @@ import com.bms.blog.entity.Board;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Data
 @NoArgsConstructor
 public class ReviewDto extends BaseEntity {
     private Long uuid;
     private Board board;
-    private String top_comment;
+    private String topComment;
     private String nickname;
+    private LocalDateTime createdDate;
+    private LocalDateTime editDate;
+    private LocalDateTime deleteDate;
 
-    public ReviewDto(Long uuid, Board board, String top_comment, String nickname){
+    public ReviewDto(Long uuid, Board board, String topComment, String nickname,
+                     LocalDateTime createdDate, LocalDateTime editDate, LocalDateTime deleteDate){
         this.uuid = uuid;
         this.board = board;
-        this.top_comment = top_comment;
+        this.topComment = topComment;
         this.nickname = nickname;
+        this.createdDate = createdDate;
+        this.editDate = editDate;
+        this.deleteDate = deleteDate;
     }
 }
