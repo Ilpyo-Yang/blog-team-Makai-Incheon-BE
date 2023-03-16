@@ -19,7 +19,7 @@ public class BoardService {
     ModelMapper modelMapper = new ModelMapper();
 
     @Transactional
-    public List<Board> getBoard(){ return boardRepository.findByDeleteDateIsNotNull(); }
+    public List<Board> getBoard(){ return boardRepository.getBoard(); }
 
     @Transactional
     public void setBoard(BoardDto dto) { boardRepository.save(modelMapper.map(dto, Board.class)); }

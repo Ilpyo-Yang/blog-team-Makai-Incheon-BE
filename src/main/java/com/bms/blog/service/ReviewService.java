@@ -20,7 +20,7 @@ public class ReviewService {
     ModelMapper modelMapper = new ModelMapper();
 
     @Transactional
-    public List<Review> getReview(){ return reviewRepository.findAll(); }
+    public List<Review> getReview(){ return reviewRepository.getReview(); }
 
     @Transactional
     public void setReview(ReviewDto dto) { reviewRepository.save(modelMapper.map(dto, Review.class)); }
