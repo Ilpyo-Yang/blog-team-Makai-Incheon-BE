@@ -23,4 +23,6 @@ public class BoardService {
     @Transactional
     public void setBoard(BoardDto dto) { boardRepository.save(modelMapper.map(dto, Board.class)); }
 
+    @Transactional
+    public void deleteBoard(Long uuid) { boardRepository.delete(boardRepository.findById(uuid).get()); }
 }

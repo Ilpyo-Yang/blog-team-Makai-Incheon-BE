@@ -30,4 +30,9 @@ public class UserController {
     public void setUser(@PathVariable(value = "uuid", required = false) Long uuid, @RequestParam("user") UserDto dto){
         userService.setUser(dto);
     }
+
+    @DeleteMapping("/delete")
+    public void deleteUser(@RequestParam(value = "uuid") Long uuid){
+        userService.deleteUser(uuid);
+    }
 }

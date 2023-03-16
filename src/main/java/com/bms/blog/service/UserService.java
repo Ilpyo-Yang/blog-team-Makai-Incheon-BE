@@ -18,11 +18,11 @@ public class UserService {
     ModelMapper modelMapper = new ModelMapper();
 
     @Transactional
-    public List<User> getUser(){
-        return userRepository.findAll();
-    }
+    public List<User> getUser(){ return userRepository.findAll(); }
 
     @Transactional
     public void setUser(UserDto dto) { userRepository.save(modelMapper.map(dto, User.class)); }
 
+    @Transactional
+    public void deleteUser(Long uuid) { userRepository.delete(userRepository.findById(uuid).get()); }
 }

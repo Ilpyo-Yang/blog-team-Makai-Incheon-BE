@@ -30,4 +30,9 @@ public class BoardController {
     public void setBoard(@PathVariable(value = "uuid", required = false) Long uuid, @RequestParam("board") BoardDto dto){
         boardService.setBoard(dto);
     }
+
+    @DeleteMapping("/delete")
+    public void deleteBoard(@RequestParam(value = "uuid") Long uuid){
+        boardService.deleteBoard(uuid);
+    }
 }

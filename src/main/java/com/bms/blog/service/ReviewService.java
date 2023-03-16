@@ -14,13 +14,15 @@ import java.util.List;
 @Transactional
 @RequiredArgsConstructor
 public class ReviewService {
-        private final ReviewRepository reviewRepository;
-        ModelMapper modelMapper = new ModelMapper();
+    private final ReviewRepository reviewRepository;
+    ModelMapper modelMapper = new ModelMapper();
 
-        @Transactional
-        public List<Review> getReview(){ return reviewRepository.findAll(); }
+    @Transactional
+    public List<Review> getReview(){ return reviewRepository.findAll(); }
 
-        @Transactional
-        public void setReview(ReviewDto dto) { reviewRepository.save(modelMapper.map(dto, Review.class)); }
+    @Transactional
+    public void setReview(ReviewDto dto) { reviewRepository.save(modelMapper.map(dto, Review.class)); }
 
+    @Transactional
+    public void deleteReview(Long uuid) { reviewRepository.delete(reviewRepository.findById(uuid).get()); }
 }

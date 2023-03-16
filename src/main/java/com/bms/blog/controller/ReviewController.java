@@ -33,4 +33,9 @@ public class ReviewController {
     public void setReview(@PathVariable(value = "uuid", required = false) Long uuid, @RequestParam("review") ReviewDto dto){
         reviewService.setReview(dto);
     }
+
+    @DeleteMapping("/delete")
+    public void deleteReview(@RequestParam(value = "uuid") Long uuid){
+        reviewService.deleteReview(uuid);
+    }
 }
