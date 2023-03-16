@@ -4,13 +4,12 @@ import com.bms.blog.entity.Tag;
 import com.bms.blog.service.TagService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/tag")
 @RequiredArgsConstructor
 public class TagController {

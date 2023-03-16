@@ -5,13 +5,12 @@ import com.bms.blog.entity.Board;
 import com.bms.blog.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/board")
 @RequiredArgsConstructor
 public class BoardController {
