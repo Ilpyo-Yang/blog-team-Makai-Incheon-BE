@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name="REVIEW")
 @Getter
@@ -22,15 +24,19 @@ public class Review extends BaseEntity{
     private Board board;
 
     @Column(name="TOP_COMMENT")
-    private String top_comment;
+    private String topComment;
 
     @Column(name="NICKNAME")
     private String nickname;
 
-    public Review(Long uuid, Board board, String top_comment, String nickname){
+    @Column(name="DELETE_DATE")
+    LocalDateTime deletedDate;
+
+    public Review(Long uuid, Board board, String topComment, String nickname, LocalDateTime deletedDate){
         this.uuid = uuid;
         this.board = board;
-        this.top_comment = top_comment;
+        this.topComment = topComment;
         this.nickname = nickname;
+        this.deletedDate = deletedDate;
     }
 }

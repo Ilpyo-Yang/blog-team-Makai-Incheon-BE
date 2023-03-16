@@ -21,7 +21,4 @@ public class TagService {
 
     @Transactional
     public void setTag(String tag) { tagRepository.save(modelMapper.map(tag, Tag.class)); }
-
-    @Transactional
-    public void deleteTag(Long uuid) { tagRepository.delete(tagRepository.findById(uuid).get()); }
 }

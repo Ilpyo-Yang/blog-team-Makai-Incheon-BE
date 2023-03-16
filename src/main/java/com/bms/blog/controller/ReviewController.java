@@ -1,20 +1,16 @@
 package com.bms.blog.controller;
 
-import com.bms.blog.dto.BoardDto;
 import com.bms.blog.dto.ReviewDto;
-import com.bms.blog.entity.Board;
 import com.bms.blog.entity.Review;
-import com.bms.blog.service.BoardService;
 import com.bms.blog.service.ReviewService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/review")
 @RequiredArgsConstructor
 public class ReviewController {
@@ -34,7 +30,7 @@ public class ReviewController {
         reviewService.setReview(dto);
     }
 
-    @DeleteMapping("/delete")
+    @PostMapping("/delete")
     public void deleteReview(@RequestParam(value = "uuid") Long uuid){
         reviewService.deleteReview(uuid);
     }

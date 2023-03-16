@@ -5,13 +5,12 @@ import com.bms.blog.entity.User;
 import com.bms.blog.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/user")
 @RequiredArgsConstructor
 public class UserController {
@@ -31,7 +30,7 @@ public class UserController {
         userService.setUser(dto);
     }
 
-    @DeleteMapping("/delete")
+    @PostMapping("/delete")
     public void deleteUser(@RequestParam(value = "uuid") Long uuid){
         userService.deleteUser(uuid);
     }

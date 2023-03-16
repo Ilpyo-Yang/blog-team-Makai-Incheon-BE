@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name="USER")
 @Getter
@@ -23,9 +25,13 @@ public class User extends BaseEntity{
     @Column(name="Password")
     private String password;
 
-    public User(Long uuid, String nickname, String password){
+    @Column(name="DELETE_DATE")
+    LocalDateTime deletedDate;
+
+    public User(Long uuid, String nickname, String password, LocalDateTime deletedDate){
         this.uuid = uuid;
         this.nickname = nickname;
         this.password = password;
+        this.deletedDate = deletedDate;
     }
 }

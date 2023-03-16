@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name="BOARD")
 @Getter
@@ -25,20 +27,24 @@ public class Board extends BaseEntity{
     private String title;
 
     @Column(name="CONTENTS_PATH")
-    private String contents_path;
+    private String contentsPath;
 
     @Column(name="TAGS")
     private String tags;
 
     @Column(name="VIEW_COUNT")
-    private String view_count;
+    private String viewCount;
 
-    public Board(Long uuid, User user, String title, String contents_path, String tags, String view_count){
+    @Column(name="DELETE_DATE")
+    LocalDateTime deletedDate;
+
+    public Board(Long uuid, User user, String title, String contentsPath, String tags, String viewCount, LocalDateTime deletedDate){
         this.uuid = uuid;
         this.user = user;
         this.title = title;
-        this.contents_path = contents_path;
+        this.contentsPath = contentsPath;
         this.tags = tags;
-        this.view_count = view_count;
+        this.viewCount = viewCount;
+        this.deletedDate = deletedDate;
     }
 }
