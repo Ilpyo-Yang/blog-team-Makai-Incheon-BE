@@ -31,7 +31,7 @@ public class UserController {
         userService.setUser(dto);
     }
 
-    @DeleteMapping("/delete")
+    @PostMapping("/delete")
     public void deleteUser(@RequestParam(value = "uuid") Long uuid){
         userService.deleteUser(uuid);
     }

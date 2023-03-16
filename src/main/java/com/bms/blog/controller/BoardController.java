@@ -31,7 +31,7 @@ public class BoardController {
         boardService.setBoard(dto);
     }
 
-    @DeleteMapping("/delete")
+    @PostMapping("/delete")
     public void deleteBoard(@RequestParam(value = "uuid") Long uuid){
         boardService.deleteBoard(uuid);
     }

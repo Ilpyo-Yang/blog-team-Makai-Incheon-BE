@@ -21,7 +21,4 @@ public class BaseEntity {
     @LastModifiedDate
     @Column(insertable = false, name="EDIT_DATE")
     LocalDateTime changedDate;
-
-    @Column(insertable = false, name="DELETE_DATE")
-    LocalDateTime deletedDate;
 }
