@@ -26,12 +26,12 @@ public class User extends BaseEntity{
     private String password;
 
     @Column(name="DELETE_DATE")
-    LocalDateTime deletedDate;
+    LocalDateTime deleteDate;
 
-    public User(Long uuid, String nickname, String password, LocalDateTime deletedDate){
+    public User(Long uuid, String nickname, String password, LocalDateTime deleteDate){
         this.uuid = uuid;
         this.nickname = nickname;
         this.password = password;
-        this.deletedDate = deletedDate;
+        this.deleteDate = deleteDate;
     }
 }

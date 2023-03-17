@@ -4,6 +4,7 @@ import com.bms.blog.entity.Tag;
 import com.bms.blog.repository.TagRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,9 +17,14 @@ public class TagService {
     private final TagRepository tagRepository;
     ModelMapper modelMapper = new ModelMapper();
 
-    @Transactional
-    public List<Tag> getTag(){ return tagRepository.findAll(); }
+    public List<String> getTag(){
+        return tagRepository.getTag();
+    }
 
-    @Transactional
-    public void setTag(String tag) { tagRepository.save(modelMapper.map(tag, Tag.class)); }
+    @Modifying
+    public Tag setTag(String tag) {
+        Tag entity = new Tag();
+        entity.setTag(tag);
+        return tagRepository.save(entity);
+    }
 }

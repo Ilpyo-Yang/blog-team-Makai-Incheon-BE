@@ -25,13 +25,18 @@ public class UserController {
        return dto;
     }
 
-    @PostMapping("/{uuid}")
-    public void setUser(@PathVariable(value = "uuid", required = false) Long uuid, @RequestParam("user") UserDto dto){
-        userService.setUser(dto);
+    @GetMapping("/{uuid}")
+    public UserDto getUser(@PathVariable("uuid") Long uuid){
+        return modelMapper.map(userService.getUser(uuid), UserDto.class);
     }
 
-    @PostMapping("/delete")
-    public void deleteUser(@RequestParam(value = "uuid") Long uuid){
-        userService.deleteUser(uuid);
+    @PostMapping
+    public UserDto setUser(@RequestPart("user") UserDto dto){
+        return modelMapper.map(userService.setUser(dto), UserDto.class);
+    }
+
+    @PostMapping("/delete/{uuid}")
+    public UserDto deleteUser(@PathVariable("uuid") Long uuid){
+        return modelMapper.map(userService.deleteUser(uuid), UserDto.class);
     }
 }

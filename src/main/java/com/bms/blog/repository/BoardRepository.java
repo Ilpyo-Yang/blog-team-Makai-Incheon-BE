@@ -9,7 +9,7 @@ import java.util.List;
 
 @Repository
 public interface BoardRepository extends JpaRepository<Board, Long> {
-    @Query(value = "SELECT * FROM BOARD WHERE DELETE_DATE IS NOT NULL", nativeQuery = true)
+    @Query(value = "SELECT * FROM BOARD WHERE DELETE_DATE IS NULL", nativeQuery = true)
     List<Board> getBoard();
 }
 
