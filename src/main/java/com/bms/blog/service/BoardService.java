@@ -37,7 +37,9 @@ public class BoardService {
         return arr;
     }
 
-    public Board setBoard(BoardDto dto) { return boardRepository.save(modelMapper.map(dto, Board.class)); }
+    public Board setBoard(BoardDto dto) {
+        return boardRepository.save(modelMapper.map(dto, Board.class));
+    }
 
     public Board deleteBoard(String uuid) {
         Board board = boardRepository.findById(uuid).get();
