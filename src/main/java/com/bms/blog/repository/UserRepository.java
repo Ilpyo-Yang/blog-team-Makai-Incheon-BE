@@ -1,6 +1,5 @@
 package com.bms.blog.repository;
 
-import com.bms.blog.entity.Board;
 import com.bms.blog.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
