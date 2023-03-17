@@ -39,14 +39,13 @@ public class BoardController {
         return boardService.getBoardTags();
     }
 
-    @PostMapping
-    public BoardDto setBoard(@RequestParam("uuid") String uuid,
+    @GetMapping("/{uuid}")
+    public BoardDto setBoard(@PathVariable(value = "uuid", required = false) String uuid,
                              @RequestParam("user_uuid") String userId,
                              @RequestParam("title") String title,
-                             @RequestParam("contentsPath") String contentsPath,
-                             @RequestParam("file") String file){
+                             @RequestParam("contents") String contents){
         List<Board> list = new ArrayList<>();
-        list.add(boardService.setBoard(new BoardDto()));    // todo 마크다운 저장방식?
+        list.add(boardService.setBoard(uuid, userId, title, contents));
         return mapper(list).get(0);
     }
 
