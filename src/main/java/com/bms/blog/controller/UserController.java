@@ -31,8 +31,8 @@ public class UserController {
     }
 
     @PostMapping
-    public UserDto setUser(@RequestPart("user") UserDto dto){
-        return modelMapper.map(userService.setUser(dto), UserDto.class);
+    public UserDto setUser(@RequestParam("uuid") String uuid, @RequestParam("nickname") String nickname, @RequestParam("password") String password){
+        return modelMapper.map(userService.setUser(uuid, nickname, password), UserDto.class);
     }
 
     @PostMapping("/delete/{uuid}")
