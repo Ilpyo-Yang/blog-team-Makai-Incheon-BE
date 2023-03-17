@@ -31,7 +31,7 @@ public class UserController {
     }
 
     @PostMapping
-    public UserDto newUser(@RequestPart("user") UserDto dto){
+    public UserDto setUser(@RequestPart("user") UserDto dto){
         return modelMapper.map(userService.setUser(dto), UserDto.class);
     }
 
