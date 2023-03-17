@@ -21,7 +21,6 @@ public class TagService {
         return tagRepository.getTag();
     }
 
-    @Modifying
     public Tag setTag(String tag) {
         Tag entity = new Tag();
         entity.setTag(tag);
