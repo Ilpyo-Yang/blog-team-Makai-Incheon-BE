@@ -23,12 +23,15 @@ public class UserService {
     public List<User> getUser(){ return userRepository.getUser(); }
 
     @Transactional
-    public void setUser(UserDto dto) { userRepository.save(modelMapper.map(dto, User.class)); }
+    public User getUser(Long uuid){ return userRepository.findById(uuid).get(); }
 
     @Transactional
-    public void deleteUser(Long uuid) {
+    public User setUser(UserDto dto) { return userRepository.save(modelMapper.map(dto, User.class)); }
+
+    @Transactional
+    public User deleteUser(Long uuid) {
         User user = userRepository.findById(uuid).get();
         user.setDeletedDate(LocalDateTime.now());
-        userRepository.save(user);
+        return userRepository.save(user);
     }
 }
