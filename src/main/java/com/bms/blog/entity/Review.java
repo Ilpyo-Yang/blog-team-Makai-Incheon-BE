@@ -30,13 +30,13 @@ public class Review extends BaseEntity{
     private String nickname;
 
     @Column(name="DELETE_DATE")
-    LocalDateTime deletedDate;
+    LocalDateTime deleteDate;
 
-    public Review(Long uuid, Board board, String topComment, String nickname, LocalDateTime deletedDate){
+    public Review(Long uuid, Board board, String topComment, String nickname, LocalDateTime deleteDate){
         this.uuid = uuid;
         this.board = board;
         this.topComment = topComment;
         this.nickname = nickname;
-        this.deletedDate = deletedDate;
+        this.deleteDate = deleteDate;
     }
 }

@@ -16,9 +16,7 @@ public class TagService {
     private final TagRepository tagRepository;
     ModelMapper modelMapper = new ModelMapper();
 
-    @Transactional
     public List<Tag> getTag(){ return tagRepository.findAll(); }
 
-    @Transactional
     public void setTag(String tag) { tagRepository.save(modelMapper.map(tag, Tag.class)); }
 }

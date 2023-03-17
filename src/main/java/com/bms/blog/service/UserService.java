@@ -19,19 +19,15 @@ public class UserService {
     private final UserRepository userRepository;
     ModelMapper modelMapper = new ModelMapper();
 
-    @Transactional
     public List<User> getUser(){ return userRepository.getUser(); }
 
-    @Transactional
     public User getUser(Long uuid){ return userRepository.findById(uuid).get(); }
 
-    @Transactional
     public User setUser(UserDto dto) { return userRepository.save(modelMapper.map(dto, User.class)); }
 
-    @Transactional
     public User deleteUser(Long uuid) {
         User user = userRepository.findById(uuid).get();
-        user.setDeletedDate(LocalDateTime.now());
+        user.setDeleteDate(LocalDateTime.now());
         return userRepository.save(user);
     }
 }

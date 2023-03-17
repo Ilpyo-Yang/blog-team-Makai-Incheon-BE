@@ -18,16 +18,15 @@ public class BoardService {
     private final BoardRepository boardRepository;
     ModelMapper modelMapper = new ModelMapper();
 
-    @Transactional
     public List<Board> getBoard(){ return boardRepository.getBoard(); }
 
-    @Transactional
-    public void setBoard(BoardDto dto) { boardRepository.save(modelMapper.map(dto, Board.class)); }
+    public Board getBoard(Long uuid){ return boardRepository.findById(uuid).get(); }
 
-    @Transactional
-    public void deleteBoard(Long uuid) {
+    public Board setBoard(BoardDto dto) { return boardRepository.save(modelMapper.map(dto, Board.class)); }
+
+    public Board deleteBoard(Long uuid) {
         Board board = boardRepository.findById(uuid).get();
-        board.setDeletedDate(LocalDateTime.now());
-        boardRepository.save(board);
+        board.setDeleteDate(LocalDateTime.now());
+        return boardRepository.save(board);
     }
 }

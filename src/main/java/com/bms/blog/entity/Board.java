@@ -36,15 +36,15 @@ public class Board extends BaseEntity{
     private String viewCount;
 
     @Column(name="DELETE_DATE")
-    LocalDateTime deletedDate;
+    LocalDateTime deleteDate;
 
-    public Board(Long uuid, User user, String title, String contentsPath, String tags, String viewCount, LocalDateTime deletedDate){
+    public Board(Long uuid, User user, String title, String contentsPath, String tags, String viewCount, LocalDateTime deleteDate){
         this.uuid = uuid;
         this.user = user;
         this.title = title;
         this.contentsPath = contentsPath;
         this.tags = tags;
         this.viewCount = viewCount;
-        this.deletedDate = deletedDate;
+        this.deleteDate = deleteDate;
     }
 }

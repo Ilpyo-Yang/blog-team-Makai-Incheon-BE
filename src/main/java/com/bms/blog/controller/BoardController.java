@@ -25,13 +25,18 @@ public class BoardController {
        return dto;
     }
 
-    @PostMapping("/{uuid}")
-    public void setBoard(@PathVariable(value = "uuid", required = false) Long uuid, @RequestParam("board") BoardDto dto){
-        boardService.setBoard(dto);
+    @GetMapping("/{uuid}")
+    public BoardDto getBoard(@PathVariable("uuid") Long uuid){
+        return modelMapper.map(boardService.getBoard(uuid), BoardDto.class);
     }
 
-    @PostMapping("/delete")
-    public void deleteBoard(@RequestParam(value = "uuid") Long uuid){
-        boardService.deleteBoard(uuid);
+    @PostMapping
+    public BoardDto newBoard(@RequestPart("board") BoardDto dto){
+        return modelMapper.map(boardService.setBoard(dto), BoardDto.class);
+    }
+
+    @PostMapping("/delete/{uuid}")
+    public BoardDto deleteBoard(@PathVariable("uuid") Long uuid){
+        return modelMapper.map(boardService.deleteBoard(uuid), BoardDto.class);
     }
 }
