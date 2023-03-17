@@ -1,12 +1,11 @@
 package com.bms.blog.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name="TAG")
@@ -16,6 +15,10 @@ import lombok.Setter;
 public class Tag extends BaseEntity{
 
     @Id
+    @Column(name="UUID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long uuid;
+
     @Column(name="TAG")
     private String tag;
 
