@@ -19,13 +19,17 @@ public class ReviewService {
     private final ReviewRepository reviewRepository;
     ModelMapper modelMapper = new ModelMapper();
 
-    public List<Review> getReview(){ return reviewRepository.getReview(); }
+    public List<Review> getReview(Long uuid){ return reviewRepository.getReview(uuid); }
 
-    public void setReview(ReviewDto dto) { reviewRepository.save(modelMapper.map(dto, Review.class)); }
+    public List<Review> getRecentBoard(int count){ return reviewRepository.getRecentBoard(count); }
 
-    public void deleteReview(Long uuid) {
+    public Review setReview(ReviewDto dto) {
+        return reviewRepository.save(modelMapper.map(dto, Review.class));
+    }
+
+    public Review deleteReview(Long uuid) {
         Review review = reviewRepository.findById(uuid).get();
         review.setDeleteDate(LocalDateTime.now());
-        reviewRepository.save(review);
+        return reviewRepository.save(review);
     }
 }

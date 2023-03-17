@@ -17,21 +17,30 @@ public class ReviewController {
     private final ReviewService reviewService;
     ModelMapper modelMapper = new ModelMapper();
 
-    @GetMapping
-    public List<ReviewDto> getBoard(){
-       List<Review> list = reviewService.getReview();
-       List<ReviewDto> dto = new ArrayList<>();
-       list.forEach(i -> dto.add(modelMapper.map(i, ReviewDto.class)));
-       return dto;
+    @GetMapping("/board/{board_uuid}")
+    public List<ReviewDto> getReview(@PathVariable(value = "board_uuid") Long uuid){
+        List<Review> list = reviewService.getReview(uuid);
+        List<ReviewDto> dto = new ArrayList<>();
+        list.forEach(i -> dto.add(modelMapper.map(i, ReviewDto.class)));
+        return dto;
     }
 
-    @PostMapping("/{uuid}")
-    public void setReview(@PathVariable(value = "uuid", required = false) Long uuid, @RequestParam("review") ReviewDto dto){
-        reviewService.setReview(dto);
+    @PostMapping
+    public ReviewDto setReview(@RequestParam("review") ReviewDto dto){
+        return modelMapper.map(reviewService.setReview(dto), ReviewDto.class);
     }
 
-    @PostMapping("/delete")
-    public void deleteReview(@RequestParam(value = "uuid") Long uuid){
-        reviewService.deleteReview(uuid);
+    @GetMapping("/recent/{count}")
+    public List<ReviewDto> getRecentBoard(@PathVariable(value = "count", required = false) int count){
+        if(count==0){ count=10; }   // 초기값
+        List<Review> list = reviewService.getRecentBoard(count);
+        List<ReviewDto> dto = new ArrayList<>();
+        list.forEach(i -> dto.add(modelMapper.map(i, ReviewDto.class)));
+        return dto;
+    }
+
+    @PostMapping("/delete/{uuid}")
+    public ReviewDto deleteReview(@PathVariable(value = "uuid") Long uuid){
+        return modelMapper.map(reviewService.deleteReview(uuid), ReviewDto.class);
     }
 }
