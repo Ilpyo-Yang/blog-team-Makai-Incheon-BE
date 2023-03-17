@@ -26,8 +26,21 @@ public class BoardController {
     }
 
     @GetMapping("/{uuid}")
-    public BoardDto getBoard(@PathVariable("uuid") Long uuid){
+    public BoardDto getBoard(@PathVariable("uuid") String uuid){
         return modelMapper.map(boardService.getBoard(uuid), BoardDto.class);
+    }
+
+    @GetMapping("/tag/{tag}")
+    public List<BoardDto> getBoardByTag(@PathVariable("tag") String tag){
+        List<Board> list = boardService.getBoardByTag(tag);
+        List<BoardDto> dto = new ArrayList<>();
+        list.forEach(i -> dto.add(modelMapper.map(i, BoardDto.class)));
+        return dto;
+    }
+
+    @GetMapping("/tags")
+    public String[] getBoardTags(){
+        return boardService.getBoardTags();
     }
 
     @PostMapping
@@ -36,7 +49,7 @@ public class BoardController {
     }
 
     @PostMapping("/delete/{uuid}")
-    public BoardDto deleteBoard(@PathVariable("uuid") Long uuid){
+    public BoardDto deleteBoard(@PathVariable("uuid") String uuid){
         return modelMapper.map(boardService.deleteBoard(uuid), BoardDto.class);
     }
 }

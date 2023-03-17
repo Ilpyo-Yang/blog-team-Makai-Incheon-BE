@@ -9,9 +9,9 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface ReviewRepository extends JpaRepository<Review, Long> {
+public interface ReviewRepository extends JpaRepository<Review, String> {
     @Query(value = "SELECT * FROM Review WHERE DELETE_DATE IS NULL AND BOARD_UUID=:uuid", nativeQuery = true)
-    List<Review> getReview(@Param("uuid") Long uuid);
+    List<Review> getReview(@Param("uuid") String uuid);
 
     @Query(value = "SELECT * FROM Review WHERE DELETE_DATE IS NULL ORDER BY CREATE_DATE DESC LIMIT :count", nativeQuery = true)
     List<Review> getRecentBoard(@Param("count") int count);

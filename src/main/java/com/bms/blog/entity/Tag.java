@@ -16,8 +16,8 @@ public class Tag extends BaseEntity{
 
     @Id
     @Column(name="UUID")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long uuid;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String uuid;
 
     @Column(name="TAG")
     private String tag;

@@ -16,8 +16,8 @@ public class User extends BaseEntity{
 
     @Id
     @Column(name="UUID")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long uuid;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String uuid;
 
     @Column(name="NICKNAME")
     private String nickname;
@@ -28,7 +28,7 @@ public class User extends BaseEntity{
     @Column(name="DELETE_DATE")
     LocalDateTime deleteDate;
 
-    public User(Long uuid, String nickname, String password, LocalDateTime deleteDate){
+    public User(String uuid, String nickname, String password, LocalDateTime deleteDate){
         this.uuid = uuid;
         this.nickname = nickname;
         this.password = password;

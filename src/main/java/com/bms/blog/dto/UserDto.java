@@ -8,14 +8,14 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 public class UserDto {
-    private Long uuid;
+    private String uuid;
     private String nickname;
     private String password;
     private LocalDateTime createdDate;
     private LocalDateTime editDate;
     private LocalDateTime deleteDate;
 
-    public UserDto(Long uuid, String nickname, String password,
+    public UserDto(String uuid, String nickname, String password,
                    LocalDateTime createdDate, LocalDateTime editDate, LocalDateTime deleteDate){
         this.uuid = uuid;
         this.nickname = nickname;

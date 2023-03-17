@@ -18,7 +18,7 @@ public class ReviewController {
     ModelMapper modelMapper = new ModelMapper();
 
     @GetMapping("/board/{board_uuid}")
-    public List<ReviewDto> getReview(@PathVariable(value = "board_uuid") Long uuid){
+    public List<ReviewDto> getReview(@PathVariable(value = "board_uuid") String uuid){
         List<Review> list = reviewService.getReview(uuid);
         List<ReviewDto> dto = new ArrayList<>();
         list.forEach(i -> dto.add(modelMapper.map(i, ReviewDto.class)));
@@ -40,7 +40,7 @@ public class ReviewController {
     }
 
     @PostMapping("/delete/{uuid}")
-    public ReviewDto deleteReview(@PathVariable(value = "uuid") Long uuid){
+    public ReviewDto deleteReview(@PathVariable(value = "uuid") String uuid){
         return modelMapper.map(reviewService.deleteReview(uuid), ReviewDto.class);
     }
 }

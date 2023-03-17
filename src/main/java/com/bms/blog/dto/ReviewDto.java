@@ -10,18 +10,18 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 public class ReviewDto extends BaseEntity {
-    private Long uuid;
-    private Board board;
+    private String uuid;
+    private String boardId;
     private String topComment;
     private String nickname;
     private LocalDateTime createdDate;
     private LocalDateTime editDate;
     private LocalDateTime deleteDate;
 
-    public ReviewDto(Long uuid, Board board, String topComment, String nickname,
+    public ReviewDto(String uuid, String boardId, String topComment, String nickname,
                      LocalDateTime createdDate, LocalDateTime editDate, LocalDateTime deleteDate){
         this.uuid = uuid;
-        this.board = board;
+        this.boardId = boardId;
         this.topComment = topComment;
         this.nickname = nickname;
         this.createdDate = createdDate;

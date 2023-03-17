@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface UserRepository extends JpaRepository<User, String> {
     @Query(value = "SELECT * FROM USER WHERE DELETE_DATE IS NULL", nativeQuery = true)
     List<User> getUser();
 }

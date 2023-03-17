@@ -21,11 +21,11 @@ public class UserService {
 
     public List<User> getUser(){ return userRepository.getUser(); }
 
-    public User getUser(Long uuid){ return userRepository.findById(uuid).get(); }
+    public User getUser(String uuid){ return userRepository.findById(uuid).get(); }
 
     public User setUser(UserDto dto) { return userRepository.save(modelMapper.map(dto, User.class)); }
 
-    public User deleteUser(Long uuid) {
+    public User deleteUser(String uuid) {
         User user = userRepository.findById(uuid).get();
         user.setDeleteDate(LocalDateTime.now());
         return userRepository.save(user);

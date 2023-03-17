@@ -26,7 +26,7 @@ public class UserController {
     }
 
     @GetMapping("/{uuid}")
-    public UserDto getUser(@PathVariable("uuid") Long uuid){
+    public UserDto getUser(@PathVariable("uuid") String uuid){
         return modelMapper.map(userService.getUser(uuid), UserDto.class);
     }
 
@@ -36,7 +36,7 @@ public class UserController {
     }
 
     @PostMapping("/delete/{uuid}")
-    public UserDto deleteUser(@PathVariable("uuid") Long uuid){
+    public UserDto deleteUser(@PathVariable("uuid") String uuid){
         return modelMapper.map(userService.deleteUser(uuid), UserDto.class);
     }
 }
