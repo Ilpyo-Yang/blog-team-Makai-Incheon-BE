@@ -31,7 +31,7 @@ public class BoardController {
     }
 
     @PostMapping
-    public BoardDto setBoard(@RequestPart("board") BoardDto dto){
+    public BoardDto setBoard(@RequestParam("board") BoardDto dto){
         return modelMapper.map(boardService.setBoard(dto), BoardDto.class);
     }
 
