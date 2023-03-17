@@ -2,16 +2,19 @@ package com.bms.blog.dto;
 
 import com.bms.blog.entity.BaseEntity;
 import com.bms.blog.entity.User;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 @Data
+@Builder
 @NoArgsConstructor
 public class BoardDto extends BaseEntity {
-    private Long uuid;
-    private User user;
+    private String uuid;
+    private String userId;
+    private String userNickname;
     private String title;
     private String contentsPath;
     private String tags;
@@ -20,13 +23,14 @@ public class BoardDto extends BaseEntity {
     private LocalDateTime editDate;
     private LocalDateTime deleteDate;
 
-    public BoardDto(Long uuid, User user, String title, String contentsPath, String tags, String viewCount,
+    public BoardDto(String uuid, String userId, String userNickname, String title, String contentsPath, String tags, String viewCount,
                     LocalDateTime createdDate, LocalDateTime editDate, LocalDateTime deleteDate){
         this.uuid = uuid;
-        this.user = user;
+        this.userId = userId;
+        this.userNickname = userNickname;
         this.title = title;
         this.contentsPath = contentsPath;
-        this.tags = tags;
+        this.tags = tags;   // '["Apple","Banana","Orange"]' // 배열 문자열
         this.viewCount = viewCount;
         this.createdDate = createdDate;
         this.editDate = editDate;

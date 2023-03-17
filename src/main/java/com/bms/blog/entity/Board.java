@@ -16,8 +16,8 @@ public class Board extends BaseEntity{
 
     @Id
     @Column(name="UUID")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long uuid;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String uuid;
 
     @ManyToOne
     @JoinColumn(name = "USER_UUID", referencedColumnName = "UUID")
@@ -38,7 +38,7 @@ public class Board extends BaseEntity{
     @Column(name="DELETE_DATE")
     LocalDateTime deleteDate;
 
-    public Board(Long uuid, User user, String title, String contentsPath, String tags, String viewCount, LocalDateTime deleteDate){
+    public Board(String uuid, User user, String title, String contentsPath, String tags, String viewCount, LocalDateTime deleteDate){
         this.uuid = uuid;
         this.user = user;
         this.title = title;

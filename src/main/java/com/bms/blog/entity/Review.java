@@ -16,8 +16,8 @@ public class Review extends BaseEntity{
 
     @Id
     @Column(name="UUID")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long uuid;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String uuid;
 
     @ManyToOne
     @JoinColumn(name = "BOARD_UUID", referencedColumnName = "UUID")
@@ -32,7 +32,7 @@ public class Review extends BaseEntity{
     @Column(name="DELETE_DATE")
     LocalDateTime deleteDate;
 
-    public Review(Long uuid, Board board, String topComment, String nickname, LocalDateTime deleteDate){
+    public Review(String uuid, Board board, String topComment, String nickname, LocalDateTime deleteDate){
         this.uuid = uuid;
         this.board = board;
         this.topComment = topComment;
