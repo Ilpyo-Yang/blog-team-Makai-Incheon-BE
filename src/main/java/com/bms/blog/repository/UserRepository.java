@@ -10,7 +10,7 @@ import java.util.List;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-    @Query(value = "SELECT * FROM USER WHERE DELETE_DATE IS NOT NULL", nativeQuery = true)
+    @Query(value = "SELECT * FROM USER WHERE DELETE_DATE IS NULL", nativeQuery = true)
     List<User> getUser();
 }
 
