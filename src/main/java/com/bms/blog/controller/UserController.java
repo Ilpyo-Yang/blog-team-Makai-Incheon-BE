@@ -31,7 +31,7 @@ public class UserController {
     }
 
     @PostMapping
-    public UserDto setUser(@RequestParam("uuid") String uuid,
+    public UserDto setUser(@RequestParam(value = "uuid", required = false) String uuid,
                            @RequestParam("nickname") String nickname,
                            @RequestParam("password") String password){
         return modelMapper.map(userService.setUser(uuid, nickname, password), UserDto.class);
