@@ -1,6 +1,7 @@
 package com.bms.blog.service;
 
 import com.bms.blog.entity.Board;
+import com.bms.blog.exception.ResourceNotFoundException;
 import com.bms.blog.repository.BoardRepository;
 import com.bms.blog.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -28,7 +29,7 @@ public class BoardService {
     }
 
     public Board getBoard(String uuid){
-        Board board = boardRepository.findById(uuid).get();
+        Board board = boardRepository.findById(uuid).orElseThrow(() -> new ResourceNotFoundException("Board", "uuid", uuid));
         board.setViewCount(board.getViewCount()+1);
         return boardRepository.save(board);
     }
