@@ -1,7 +1,6 @@
 package com.bms.blog.dto;
 
 import com.bms.blog.entity.BaseEntity;
-import com.bms.blog.entity.User;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
