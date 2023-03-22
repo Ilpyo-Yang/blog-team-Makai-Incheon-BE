@@ -41,7 +41,7 @@ public class BoardService {
         return arr;
     }
 
-    public Board setBoard(String uuid, String userId, String title, String contents) {
+    public Board setBoard(String uuid, String userId, String title, String contents, String tags) {
         Board board;
 
         if(uuid==null){
@@ -53,12 +53,13 @@ public class BoardService {
         }
 
         board.setTitle(title);
+        board.setTags(tags);
 
-        String str = saveFile(userId, title, contents);
+        /*String str = saveFile(userId, title, contents);
         if("IOException".equals(saveFile(userId, title, contents))){
-            return new Board();
+            return new Board(); // 에러 메세지
         }
-        board.setContentsPath(str);
+        board.setContentsPath(str);*/
         return boardRepository.save(board);
     }
 

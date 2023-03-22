@@ -39,13 +39,24 @@ public class BoardController {
         return boardService.getBoardTags();
     }
 
-    @GetMapping("/{uuid}")
-    public BoardDto setBoard(@PathVariable(value = "uuid", required = false) String uuid,
+    @PostMapping
+    public BoardDto setBoard(@RequestParam("user_uuid") String userId,
+                             @RequestParam("title") String title,
+                             @RequestParam("contents") String contents,
+                             @RequestParam("tags") String tags){
+        List<Board> list = new ArrayList<>();
+        list.add(boardService.setBoard(null, userId, title, contents, tags));
+        return mapper(list).get(0);
+    }
+
+    @PostMapping("/{uuid}")
+    public BoardDto setBoard(@PathVariable("uuid") String uuid,
                              @RequestParam("user_uuid") String userId,
                              @RequestParam("title") String title,
-                             @RequestParam("contents") String contents){
+                             @RequestParam("contents") String contents,
+                             @RequestParam("tags") String tags){
         List<Board> list = new ArrayList<>();
-        list.add(boardService.setBoard(uuid, userId, title, contents));
+        list.add(boardService.setBoard(uuid, userId, title, contents, tags));
         return mapper(list).get(0);
     }
 
