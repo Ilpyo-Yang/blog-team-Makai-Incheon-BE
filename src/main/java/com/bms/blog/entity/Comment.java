@@ -8,11 +8,11 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name="REVIEW")
+@Table(name="COMMENT")
 @Getter
 @Setter
 @NoArgsConstructor
-public class Review extends BaseEntity{
+public class Comment extends BaseEntity{
 
     @Id
     @Column(name="UUID")
@@ -26,16 +26,20 @@ public class Review extends BaseEntity{
     @Column(name="TOP_COMMENT")
     private String topComment;
 
+    @Column(name="USER_UUID")
+    private String userId;
+
     @Column(name="NICKNAME")
     private String nickname;
 
     @Column(name="DELETE_DATE")
     LocalDateTime deleteDate;
 
-    public Review(String uuid, Board board, String topComment, String nickname, LocalDateTime deleteDate){
+    public Comment(String uuid, Board board, String topComment, String userId, String nickname, LocalDateTime deleteDate){
         this.uuid = uuid;
         this.board = board;
         this.topComment = topComment;
+        this.userId = userId;
         this.nickname = nickname;
         this.deleteDate = deleteDate;
     }

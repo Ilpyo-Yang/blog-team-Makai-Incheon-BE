@@ -1,7 +1,5 @@
 package com.bms.blog.service;
 
-import com.bms.blog.dto.UserDto;
-import com.bms.blog.entity.Review;
 import com.bms.blog.entity.User;
 import com.bms.blog.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -9,7 +7,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.security.cert.Extension;
 import java.time.LocalDateTime;
 import java.util.List;
 
