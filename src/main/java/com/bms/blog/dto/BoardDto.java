@@ -1,13 +1,12 @@
 package com.bms.blog.dto;
 
 import com.bms.blog.entity.BaseEntity;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
-@Data
+@Getter
+@Setter
 @Builder
 @NoArgsConstructor
 public class BoardDto extends BaseEntity {
