@@ -11,23 +11,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/review")
+@RequestMapping("/comment")
 @RequiredArgsConstructor
-public class ReviewController {
+public class CommentController {
     private final CommentService commentService;
     ModelMapper modelMapper = new ModelMapper();
 
     @GetMapping("/board/{board_uuid}")
-    public List<CommentDto> getReview(@PathVariable(value = "board_uuid") String uuid){
-        List<Comment> list = commentService.getReview(uuid);
+    public List<CommentDto> getComment(@PathVariable(value = "board_uuid") String uuid){
+        List<Comment> list = commentService.getComment(uuid);
         List<CommentDto> dto = new ArrayList<>();
         list.forEach(i -> dto.add(modelMapper.map(i, CommentDto.class)));
         return dto;
     }
 
     @PostMapping
-    public CommentDto setReview(@RequestParam("review") CommentDto dto){
-        return modelMapper.map(commentService.setReview(dto), CommentDto.class);
+    public CommentDto setComment(@RequestParam("comment") CommentDto dto){
+        return modelMapper.map(commentService.setComment(dto), CommentDto.class);
     }
 
     @GetMapping("/recent/{count}")
@@ -40,7 +40,7 @@ public class ReviewController {
     }
 
     @PostMapping("/delete/{uuid}")
-    public CommentDto deleteReview(@PathVariable(value = "uuid") String uuid){
-        return modelMapper.map(commentService.deleteReview(uuid), CommentDto.class);
+    public CommentDto deleteComment(@PathVariable(value = "uuid") String uuid){
+        return modelMapper.map(commentService.deleteComment(uuid), CommentDto.class);
     }
 }

@@ -18,19 +18,19 @@ public class CommentService {
     private final CommentRepository commentRepository;
     ModelMapper modelMapper = new ModelMapper();
 
-    public List<Comment> getReview(String uuid){
-        return commentRepository.getReview(uuid);
+    public List<Comment> getComment(String uuid){
+        return commentRepository.getComment(uuid);
     }
 
     public List<Comment> getRecentBoard(int count){
         return commentRepository.getRecentBoard(count);
     }
 
-    public Comment setReview(CommentDto dto) {
+    public Comment setComment(CommentDto dto) {
         return commentRepository.save(modelMapper.map(dto, Comment.class));
     }
 
-    public Comment deleteReview(String uuid) {
+    public Comment deleteComment(String uuid) {
         Comment comment = commentRepository.findById(uuid).get();
         comment.setDeleteDate(LocalDateTime.now());
         return commentRepository.save(comment);

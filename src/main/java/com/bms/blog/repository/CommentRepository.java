@@ -10,10 +10,10 @@ import java.util.List;
 
 @Repository
 public interface CommentRepository extends JpaRepository<Comment, String> {
-    @Query(value = "SELECT * FROM Review WHERE DELETE_DATE IS NULL AND BOARD_UUID=:uuid", nativeQuery = true)
-    List<Comment> getReview(@Param("uuid") String uuid);
+    @Query(value = "SELECT * FROM Comment WHERE DELETE_DATE IS NULL AND BOARD_UUID=:uuid", nativeQuery = true)
+    List<Comment> getComment(@Param("uuid") String uuid);
 
-    @Query(value = "SELECT * FROM Review WHERE DELETE_DATE IS NULL ORDER BY CREATE_DATE DESC LIMIT :count", nativeQuery = true)
+    @Query(value = "SELECT * FROM Comment WHERE DELETE_DATE IS NULL ORDER BY CREATE_DATE DESC LIMIT :count", nativeQuery = true)
     List<Comment> getRecentBoard(@Param("count") int count);
 }
 
