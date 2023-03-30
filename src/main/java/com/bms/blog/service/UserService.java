@@ -3,7 +3,6 @@ package com.bms.blog.service;
 import com.bms.blog.entity.User;
 import com.bms.blog.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,7 +14,10 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
-    ModelMapper modelMapper = new ModelMapper();
+
+    public User login(String nickname, String password) {
+        return userRepository.findByNicknameAndPassword(nickname, password);
+    }
 
     public List<User> getUser(){ return userRepository.getUser(); }
 
