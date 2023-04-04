@@ -28,8 +28,11 @@ public class SecurityConfig {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .requestMatchers("/members/login").permitAll()
-                .requestMatchers("/members/test").hasRole("USER")
+                .requestMatchers("/**").permitAll()
+                .requestMatchers("/user/**").hasRole("USER")
+                .requestMatchers("/board/**").hasRole("USER")
+                .requestMatchers("/tag/**").hasRole("USER")
+                .requestMatchers("/commit/**").hasRole("USER")
                 .anyRequest().authenticated()
                 .and()
                 .addFilterBefore(new JwtAuthenticationFilter(tokenProvider), UsernamePasswordAuthenticationFilter.class);

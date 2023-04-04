@@ -21,8 +21,7 @@ public class UserController {
 
     @PostMapping("/login")
     public TokenDto login(@RequestParam("nickname") String nickname, @RequestParam("password") String password) {
-        String uuid = userService.loginCheck(nickname, password);
-        return userService.login(uuid, password);
+        return userService.login(userService.findByNickname(nickname).getUuid(), password);
     }
 
     @GetMapping

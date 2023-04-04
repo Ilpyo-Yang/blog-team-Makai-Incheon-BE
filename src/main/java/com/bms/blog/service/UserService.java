@@ -41,15 +41,15 @@ public class UserService implements UserDetailsService {
                 .roles(new String[]{user.getRole()})
                 .build();
     }
-    public String loginCheck(String nickname, String password) {
-        return userRepository.findByNicknameAndPassword(nickname, password).getUuid().toString();
+    public User findByNickname(String nickname) {
+        return userRepository.findByNickname(nickname);
     }
 
     public TokenDto login(String uuid, String password) {
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(uuid, password);
         Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
-        TokenDto tokenInfo = tokenProvider.generateToken(authentication);
-        return tokenInfo;
+        TokenDto tokenDto = tokenProvider.generateToken(authentication);
+        return tokenDto;
     }
 
     public List<User> getUser(){ return userRepository.getUser(); }
