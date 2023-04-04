@@ -41,8 +41,9 @@ public class UserController {
     @PostMapping
     public ResponseEntity<UserDto> setUser(@RequestParam(value = "uuid", required = false) String uuid,
                            @RequestParam("nickname") String nickname,
-                           @RequestParam("password") String password){
-        return ResponseEntity.ok(modelMapper.map(userService.setUser(uuid, nickname, password), UserDto.class));
+                           @RequestParam("password") String password,
+                           @RequestParam(value = "role", required = false) String role){
+        return ResponseEntity.ok(modelMapper.map(userService.setUser(uuid, nickname, password, role), UserDto.class));
     }
 
     @PostMapping("/delete/{uuid}")

@@ -42,7 +42,7 @@ public class UserService implements UserDetailsService {
                 .build();
     }
     public String loginCheck(String nickname, String password) {
-        return userRepository.findByNicknameAndPassword(nickname, password).getUuid();
+        return userRepository.findByNicknameAndPassword(nickname, password).getUuid().toString();
     }
 
     public TokenDto login(String uuid, String password) {
@@ -56,17 +56,22 @@ public class UserService implements UserDetailsService {
 
     public User getUser(String uuid){ return userRepository.findById(uuid).get(); }
 
-    public User setUser(String uuid, String nickname, String password) {
+    public User setUser(String uuid, String nickname, String password, String role) {
         User user;
+
         if(uuid==null){ user = new User(); }
-        else{ user = userRepository.findById(uuid).get(); }
+        else{ user = userRepository.findById(uuid).orElseThrow(); }
         user.setNickname(nickname);
         user.setPassword(password);
+
+        if(role==null) user.setRole("ROLE_USER");
+        else user.setRole(role);
+
         return userRepository.save(user);
     }
 
     public User deleteUser(String uuid) {
-        User user = userRepository.findById(uuid).get();
+        User user = userRepository.findById(uuid).orElseThrow();
         user.setDeleteDate(LocalDateTime.now());
         return userRepository.save(user);
     }

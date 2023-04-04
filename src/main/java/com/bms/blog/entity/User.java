@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Table(name="USER")
@@ -22,8 +23,7 @@ public class User extends BaseEntity implements UserDetails {
 
     @Id
     @Column(name="UUID")
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private String uuid;
+    private String uuid = UUID.randomUUID().toString();
 
     @Column(name="NICKNAME", updatable = false, unique = true, nullable = false)
     private String nickname;
@@ -34,7 +34,7 @@ public class User extends BaseEntity implements UserDetails {
     @Column(name="DELETE_DATE")
     LocalDateTime deleteDate;
 
-    @Column(name="ROLE", nullable = false)
+    @Column(name="ROLE", columnDefinition = "varchar(100) default 'ROLE_USER'")
     private String role;
 
     public User(String uuid, String nickname, String password, String role, LocalDateTime deleteDate){

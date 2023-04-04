@@ -105,7 +105,6 @@ public class BoardService {
         List<BoardDto> dtoList = new ArrayList<>();
         for(Board b: list){
             BoardDto dto = new BoardDto().builder()
-                    .uuid(b.getUuid())
                     .userId(b.getUser().getUuid())
                     .userNickname(b.getUser().getNickname())
                     .title(b.getTitle())

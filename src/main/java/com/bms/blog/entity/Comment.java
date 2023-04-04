@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Entity
 @Table(name="COMMENT")
@@ -16,8 +17,7 @@ public class Comment extends BaseEntity{
 
     @Id
     @Column(name="UUID")
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private String uuid;
+    private String uuid = UUID.randomUUID().toString();
 
     @ManyToOne
     @JoinColumn(name = "BOARD_UUID", referencedColumnName = "UUID")
