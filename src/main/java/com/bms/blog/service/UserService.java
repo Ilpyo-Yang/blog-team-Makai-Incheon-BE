@@ -1,8 +1,13 @@
 package com.bms.blog.service;
 
+import com.bms.blog.dto.TokenDto;
 import com.bms.blog.entity.User;
 import com.bms.blog.repository.UserRepository;
+import com.bms.blog.token.TokenProvider;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,9 +19,18 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
+    private final AuthenticationManagerBuilder authenticationManagerBuilder;
+    private final TokenProvider tokenProvider;
 
-    public User login(String nickname, String password) {
-        return userRepository.findByNicknameAndPassword(nickname, password);
+    public String loginCheck(String nickname, String password) {
+        return userRepository.findByNicknameAndPassword(nickname, password).getUuid();
+    }
+
+    public TokenDto login(String uuid, String password) {
+        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(uuid, password);
+        Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
+        TokenDto tokenInfo = tokenProvider.generateToken(authentication);
+        return tokenInfo;
     }
 
     public List<User> getUser(){ return userRepository.getUser(); }
@@ -37,4 +51,5 @@ public class UserService {
         user.setDeleteDate(LocalDateTime.now());
         return userRepository.save(user);
     }
+
 }
