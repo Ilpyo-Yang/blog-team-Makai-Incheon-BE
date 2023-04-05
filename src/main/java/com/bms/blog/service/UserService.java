@@ -1,13 +1,10 @@
 package com.bms.blog.service;
 
-import com.bms.blog.dto.TokenDto;
 import com.bms.blog.entity.User;
 import com.bms.blog.repository.UserRepository;
 import com.bms.blog.token.TokenProvider;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -17,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 @Transactional
@@ -38,18 +36,21 @@ public class UserService implements UserDetailsService {
         return org.springframework.security.core.userdetails.User.builder()
                 .username(user.getUsername())
                 .password(passwordEncoder.encode(user.getPassword()))
-                .roles(new String[]{user.getRole()})
+                .roles(user.getRole())
                 .build();
     }
     public User findByNickname(String nickname) {
         return userRepository.findByNickname(nickname);
     }
 
-    public TokenDto login(String uuid, String password) {
-        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(uuid, password);
-        Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
-        TokenDto tokenDto = tokenProvider.generateToken(authentication);
-        return tokenDto;
+    public String login(String uuid, String password) {
+        //UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(uuid, password);
+        //Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
+        User user = userRepository.findById(uuid).orElseThrow();
+        if (!passwordEncoder.matches(password, user.getPassword()))
+            throw new NoSuchElementException();
+        return tokenProvider.generateToken(uuid, user.getRole());
+
     }
 
     public List<User> getUser(){ return userRepository.getUser(); }
@@ -62,10 +63,10 @@ public class UserService implements UserDetailsService {
         if(uuid==null){ user = new User(); }
         else{ user = userRepository.findById(uuid).orElseThrow(); }
         user.setNickname(nickname);
-        user.setPassword(password);
+        user.setPassword(passwordEncoder.encode(password).toString());
 
-        if(role==null) user.setRole("ROLE_USER");
-        else user.setRole(role);
+        //if(role==null) user.setRole("USER");
+        //else user.setRole(role);
 
         return userRepository.save(user);
     }

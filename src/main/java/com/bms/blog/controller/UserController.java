@@ -1,6 +1,5 @@
 package com.bms.blog.controller;
 
-import com.bms.blog.dto.TokenDto;
 import com.bms.blog.dto.UserDto;
 import com.bms.blog.entity.User;
 import com.bms.blog.service.UserService;
@@ -20,7 +19,7 @@ public class UserController {
     ModelMapper modelMapper = new ModelMapper();
 
     @PostMapping("/login")
-    public TokenDto login(@RequestParam("nickname") String nickname, @RequestParam("password") String password) {
+    public String login(@RequestParam("nickname") String nickname, @RequestParam("password") String password) {
         return userService.login(userService.findByNickname(nickname).getUuid(), password);
     }
 

@@ -1,6 +1,7 @@
 package com.bms.blog.entity;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name="USER")
@@ -34,10 +36,10 @@ public class User extends BaseEntity implements UserDetails {
     @Column(name="DELETE_DATE")
     LocalDateTime deleteDate;
 
-    @Column(name="ROLE", columnDefinition = "varchar(100) default 'ROLE_USER'")
+    @Column(name="ROLE", columnDefinition = "varchar(100) default 'USER'")
     private String role;
 
-    public User(String uuid, String nickname, String password, String role, LocalDateTime deleteDate){
+    public User(String uuid, String nickname, String password, List<String> roles, LocalDateTime deleteDate){
         this.uuid = uuid;
         this.nickname = nickname;
         this.password = password;
