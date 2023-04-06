@@ -28,7 +28,7 @@ public class SecurityConfig {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .requestMatchers("/**").permitAll()
+                .requestMatchers("/user/login").permitAll()
                 .requestMatchers("/user/**").hasRole("USER")
                 .requestMatchers("/board/**").hasRole("USER")
                 .requestMatchers("/tag/**").hasRole("USER")

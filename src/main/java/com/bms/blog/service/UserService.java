@@ -65,8 +65,8 @@ public class UserService implements UserDetailsService {
         user.setNickname(nickname);
         user.setPassword(passwordEncoder.encode(password).toString());
 
-        //if(role==null) user.setRole("USER");
-        //else user.setRole(role);
+        if(role==null) user.setRole("USER");
+        else user.setRole(role);
 
         return userRepository.save(user);
     }
