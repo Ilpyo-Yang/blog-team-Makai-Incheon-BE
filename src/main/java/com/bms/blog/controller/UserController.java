@@ -5,6 +5,7 @@ import com.bms.blog.entity.User;
 import com.bms.blog.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -17,28 +18,34 @@ public class UserController {
     private final UserService userService;
     ModelMapper modelMapper = new ModelMapper();
 
+    @PostMapping("/login")
+    public String login(@RequestParam("nickname") String nickname, @RequestParam("password") String password) {
+        return userService.login(userService.findByNickname(nickname).getUuid(), password);
+    }
+
     @GetMapping
-    public List<UserDto> getUser(){
+    public ResponseEntity<List<UserDto>> getUser(){
        List<User> list = userService.getUser();
        List<UserDto> dto = new ArrayList<>();
        list.forEach(i -> dto.add(modelMapper.map(i, UserDto.class)));
-       return dto;
+       return ResponseEntity.ok(dto);
     }
 
     @GetMapping("/{uuid}")
-    public UserDto getUser(@PathVariable("uuid") String uuid){
-        return modelMapper.map(userService.getUser(uuid), UserDto.class);
+    public ResponseEntity<UserDto> getUser(@PathVariable("uuid") String uuid){
+        return ResponseEntity.ok(modelMapper.map(userService.getUser(uuid), UserDto.class));
     }
 
     @PostMapping
-    public UserDto setUser(@RequestParam("uuid") String uuid,
+    public ResponseEntity<UserDto> setUser(@RequestParam(value = "uuid", required = false) String uuid,
                            @RequestParam("nickname") String nickname,
-                           @RequestParam("password") String password){
-        return modelMapper.map(userService.setUser(uuid, nickname, password), UserDto.class);
+                           @RequestParam("password") String password,
+                           @RequestParam(value = "role", required = false) String role){
+        return ResponseEntity.ok(modelMapper.map(userService.setUser(uuid, nickname, password, role), UserDto.class));
     }
 
     @PostMapping("/delete/{uuid}")
-    public UserDto deleteUser(@PathVariable("uuid") String uuid){
-        return modelMapper.map(userService.deleteUser(uuid), UserDto.class);
+    public ResponseEntity<UserDto> deleteUser(@PathVariable("uuid") String uuid){
+        return ResponseEntity.ok(modelMapper.map(userService.deleteUser(uuid), UserDto.class));
     }
 }

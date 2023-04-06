@@ -8,7 +8,7 @@ spring:
     password: Abcd123!
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     properties:
       hibernate:
         show_sql: true
@@ -16,3 +16,6 @@ spring:
         default_batch_fetch_size: 1000
     open-in-view: false
     defer-datasource-initialization: true
+
+jwt:
+  secret: VlwEyVBsYt9V7zq57TejMnVUyzblYcfPQye08f7MGVA9XkHa

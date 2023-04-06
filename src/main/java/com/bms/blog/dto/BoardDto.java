@@ -1,14 +1,12 @@
 package com.bms.blog.dto;
 
 import com.bms.blog.entity.BaseEntity;
-import com.bms.blog.entity.User;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
-@Data
+@Getter
+@Setter
 @Builder
 @NoArgsConstructor
 public class BoardDto extends BaseEntity {
@@ -30,7 +28,7 @@ public class BoardDto extends BaseEntity {
         this.userNickname = userNickname;
         this.title = title;
         this.contentsPath = contentsPath;
-        this.tags = tags;   // '["Apple","Banana","Orange"]' // 배열 문자열
+        this.tags = tags;
         this.viewCount = viewCount;
         this.createdDate = createdDate;
         this.editDate = editDate;

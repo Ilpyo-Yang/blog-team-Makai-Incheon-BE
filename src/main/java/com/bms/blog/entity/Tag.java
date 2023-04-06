@@ -5,20 +5,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
-
 @Entity
 @Table(name="TAG")
 @Getter
 @Setter
 @NoArgsConstructor
-public class Tag extends BaseEntity{
-
+public class Tag{
     @Id
-    @Column(name="UUID")
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private String uuid;
-
     @Column(name="TAG")
     private String tag;
 
