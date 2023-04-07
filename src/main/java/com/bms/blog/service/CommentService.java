@@ -1,14 +1,11 @@
 package com.bms.blog.service;
 
-import com.bms.blog.dto.BoardDto;
 import com.bms.blog.dto.CommentDto;
-import com.bms.blog.entity.Board;
 import com.bms.blog.entity.Comment;
 import com.bms.blog.repository.BoardRepository;
 import com.bms.blog.repository.CommentRepository;
 import com.bms.blog.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,8 +20,6 @@ public class CommentService {
     private final CommentRepository commentRepository;
     private final UserRepository userRepository;
     private final BoardRepository boardRepository;
-    private final
-    ModelMapper modelMapper = new ModelMapper();
 
     public List<CommentDto> getComment(String uuid){
         List<Comment> list = commentRepository.getComment(uuid);
