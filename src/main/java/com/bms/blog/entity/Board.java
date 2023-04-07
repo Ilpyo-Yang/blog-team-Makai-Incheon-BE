@@ -33,12 +33,12 @@ public class Board extends BaseEntity{
     private String tags;
 
     @Column(name="VIEW_COUNT")
-    private String viewCount;
+    private int viewCount;
 
     @Column(name="DELETE_DATE")
     LocalDateTime deleteDate;
 
-    public Board(String uuid, User user, String title, String contentsPath, String tags, String viewCount, LocalDateTime deleteDate){
+    public Board(String uuid, User user, String title, String contentsPath, String tags, int viewCount, LocalDateTime deleteDate){
         this.uuid = uuid;
         this.user = user;
         this.title = title;

@@ -20,15 +20,16 @@ public class CommentController {
 
     @GetMapping("/board/{board_uuid}")
     public ResponseEntity<List<CommentDto>> getComment(@PathVariable(value = "board_uuid") String uuid){
-        List<Comment> list = commentService.getComment(uuid);
-        List<CommentDto> dto = new ArrayList<>();
-        list.forEach(i -> dto.add(modelMapper.map(i, CommentDto.class)));
-        return ResponseEntity.ok(dto);
+        return ResponseEntity.ok(commentService.getComment(uuid));
     }
 
     @PostMapping
-    public ResponseEntity<CommentDto> setComment(@RequestParam("comment") CommentDto dto){
-        return ResponseEntity.ok(modelMapper.map(commentService.setComment(dto), CommentDto.class));
+    public ResponseEntity<CommentDto> setComment(@RequestParam(value = "uuid", required = false) String uuid,
+                                                 @RequestParam("board_uuid") String boardId,
+                                                 @RequestParam("user_uuid") String userId,
+                                                 @RequestParam("comment") String comment,
+                                                 @RequestParam(value = "topComment", required = false) String topComment){
+        return ResponseEntity.ok(commentService.setComment(uuid, boardId, userId, comment, topComment));
     }
 
     @GetMapping("/recent/{count}")

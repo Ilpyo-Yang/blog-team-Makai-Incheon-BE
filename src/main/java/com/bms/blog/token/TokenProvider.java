@@ -33,7 +33,7 @@ public class TokenProvider {
 
     public String generateToken(String uuid, String role) {
         Claims claims = Jwts.claims().setSubject(uuid);
-        if(role!=null) claims.put("role", role);
+        claims.put("role", role);
         Date now = new Date();
         return Jwts.builder()
                 .setClaims(claims)

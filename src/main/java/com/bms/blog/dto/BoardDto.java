@@ -16,12 +16,12 @@ public class BoardDto extends BaseEntity {
     private String title;
     private String contentsPath;
     private String tags;
-    private String viewCount;
+    private int viewCount;
     private LocalDateTime createdDate;
     private LocalDateTime editDate;
     private LocalDateTime deleteDate;
 
-    public BoardDto(String uuid, String userId, String userNickname, String title, String contentsPath, String tags, String viewCount,
+    public BoardDto(String uuid, String userId, String userNickname, String title, String contentsPath, String tags, int viewCount,
                     LocalDateTime createdDate, LocalDateTime editDate, LocalDateTime deleteDate){
         this.uuid = uuid;
         this.userId = userId;

@@ -2,10 +2,14 @@ package com.bms.blog.controller;
 
 import com.bms.blog.dto.UserDto;
 import com.bms.blog.entity.User;
+import com.bms.blog.exception.BadRequestException;
+import com.bms.blog.exception.ResourceNotFoundException;
 import com.bms.blog.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.resource.HttpResource;
 
@@ -39,10 +43,16 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<UserDto> setUser(@RequestParam(value = "uuid", required = false) String uuid,
-                           @RequestParam("nickname") String nickname,
-                           @RequestParam("password") String password,
-                           @RequestParam(value = "role", required = false) String role){
-        return ResponseEntity.ok(modelMapper.map(userService.setUser(uuid, nickname, password, role), UserDto.class));
+                                           @RequestParam("nickname") String nickname,
+                                           @RequestParam("password") String password,
+                                           @RequestParam(value = "role", required = false) String role,
+                                           @AuthenticationPrincipal UserDetails user){
+        if(uuid!=null && !user.getUsername().equals(uuid)){
+            throw new BadRequestException("본인 계정이 아닌 경우, 사용자 수정");
+        }else{
+            return ResponseEntity.ok(modelMapper.map(userService.setUser(uuid, nickname, password, role), UserDto.class));
+        }
+
     }
 
     @PostMapping("/delete/{uuid}")
