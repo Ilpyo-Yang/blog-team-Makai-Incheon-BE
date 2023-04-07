@@ -29,10 +29,7 @@ public class SecurityConfig {
                 .and()
                 .authorizeRequests()
                 .requestMatchers("/**").permitAll()
-                .requestMatchers("/user/**").hasRole("USER")
-                .requestMatchers("/board/**").hasRole("USER")
-                .requestMatchers("/tag/**").hasRole("USER")
-                .requestMatchers("/commit/**").hasRole("USER")
+                .requestMatchers("/user/**", "/board/**","/tag/**","/commit/**").authenticated()
                 .anyRequest().authenticated()
                 .and()
                 .addFilterBefore(new JwtAuthenticationFilter(tokenProvider), UsernamePasswordAuthenticationFilter.class);

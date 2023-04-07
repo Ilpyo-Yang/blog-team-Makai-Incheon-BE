@@ -50,18 +50,18 @@ public class BoardService {
     }
 
     public BoardDto setBoard(String uuid, String userId, String title, String contents, String tags) {
-        Board board;
+        Board dto;
 
         if(uuid==null){
-            board = new Board();
-            board.setUser(userRepository.findById(userId).get());
+            dto = new Board();
+            dto.setUser(userRepository.findById(userId).get());
         }
         else{
-            board = boardRepository.findById(uuid).get();
+            dto = boardRepository.findById(uuid).get();
         }
 
-        board.setTitle(title);
-        board.setTags(tags);
+        dto.setTitle(title);
+        dto.setTags(tags);
 
         /*String str = saveFile(userId, title, contents);
         if("IOException".equals(saveFile(userId, title, contents))){
@@ -69,9 +69,10 @@ public class BoardService {
         }
         board.setContentsPath(str);*/
 
+        boardRepository.save(dto);
+
         List<Board> list = new ArrayList<>();
-        boardRepository.save(board);
-        list.add(board);
+        list.add(dto);
         return mapper(list).get(0);
     }
 
@@ -105,6 +106,7 @@ public class BoardService {
         List<BoardDto> dtoList = new ArrayList<>();
         for(Board b: list){
             BoardDto dto = new BoardDto().builder()
+                    .uuid(b.getUuid())
                     .userId(b.getUser().getUuid())
                     .userNickname(b.getUser().getNickname())
                     .title(b.getTitle())

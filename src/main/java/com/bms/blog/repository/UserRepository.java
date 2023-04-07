@@ -2,7 +2,6 @@ package com.bms.blog.repository;
 
 import com.bms.blog.entity.User;
 
-import org.hibernate.Hibernate;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

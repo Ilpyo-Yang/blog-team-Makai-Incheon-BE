@@ -32,15 +32,19 @@ public class Comment extends BaseEntity{
     @Column(name="NICKNAME")
     private String nickname;
 
+    @Column(name="COMMENT", columnDefinition = "varchar(500) not null")
+    private String comment;
+
     @Column(name="DELETE_DATE")
     LocalDateTime deleteDate;
 
-    public Comment(String uuid, Board board, String topComment, String userId, String nickname, LocalDateTime deleteDate){
+    public Comment(String uuid, Board board, String topComment, String userId, String nickname, String comment, LocalDateTime deleteDate){
         this.uuid = uuid;
         this.board = board;
         this.topComment = topComment;
         this.userId = userId;
         this.nickname = nickname;
+        this.comment = comment;
         this.deleteDate = deleteDate;
     }
 }
