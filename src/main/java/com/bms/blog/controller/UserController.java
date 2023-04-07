@@ -5,7 +5,11 @@ import com.bms.blog.entity.User;
 import com.bms.blog.exception.BadRequestException;
 import com.bms.blog.exception.ResourceNotFoundException;
 import com.bms.blog.service.UserService;
+import com.bms.blog.token.TokenProvider;
+import io.jsonwebtoken.Jwts;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.apache.catalina.users.SparseUserDatabase;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,11 +25,17 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
+    private final TokenProvider tokenProvider;
     ModelMapper modelMapper = new ModelMapper();
 
     @PostMapping("/login")
     public String login(@RequestParam("nickname") String nickname, @RequestParam("password") String password) {
         return userService.login(userService.findByNickname(nickname).getUuid(), password);
+    }
+
+    @GetMapping("/loginCheck")
+    public String login(@AuthenticationPrincipal UserDetails user) {
+        return user.getUsername();
     }
 
     @GetMapping
